@@ -1,0 +1,47 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ../ses-activity-frontend
+    ports:
+      - "5173:5173"
+    volumes:
+      - ../ses-activity-frontend:/app
+      - ses-frontend-node_modules:/app/node_modules
+    networks:
+      - ses-network
+  backend:
+    build:
+      context: ../ses-activity-backend
+      dockerfile: Dockerfile.dev
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/ses_db
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postgres
+    networks:
+      - ses-network
+  db:
+    image: postgres:15
+    container_name: ses-db-1
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: ses_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: dummy
+    volumes:
+      - ses-db-data:/var/lib/postgresql/data   # ★データ保持用
+      - ./postgres-init:/docker-entrypoint-initdb.d   # （初期データ用）
+    networks:
+      - ses-network
+volumes:
+  ses-db-data:
+  ses-frontend-node_modules:
+networks:
+  ses-network:
+    driver: bridge

@@ -1,0 +1,5 @@
+name,email,password,department_id,role_id,status_id,is_bp,joined_date,sex,birth_date,nearest_station,education,created_at,updated_at
+山田 太郎,yamada@example.com,hashed_pw1,1,1,1,False,2023-01-10,M,1990-04-01,渋谷駅,大学卒,2024-04-01,2024-04-01
+佐藤 花子,sato@example.com,hashed_pw2,2,2,1,False,2022-04-01,F,1992-06-15,横浜駅,短大卒,2024-04-01,2024-04-01
+田中 守,tanaka@example.com,hashed_pw3,1,3,1,True,2023-06-01,M,1988-12-05,千葉駅,大学院卒,2024-04-01,2024-04-01
+鈴木 美咲,suzuki@example.com,hashed_pw4,2,4,1,True,2022-10-01,F,1995-09-20,大宮駅,大学卒,2024-04-01,2024-04-01
