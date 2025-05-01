@@ -1,4 +1,4 @@
-version: '3.8'
+version: "3.8"
 
 services:
   frontend:
@@ -16,6 +16,9 @@ services:
       context: ../ses-activity-backend
     ports:
       - "8080:8080"
+      - "5005:5005"  # ← デフォルトのJPDAリモートデバッグポート
+    volumes:
+      - ../ses-activity-backend:/app
     depends_on:
       - db
     environment:
@@ -32,10 +35,10 @@ services:
     environment:
       POSTGRES_DB: ses_db
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: dummy
+      POSTGRES_PASSWORD: postgres
     volumes:
-      - ses-db-data:/var/lib/postgresql/data   # ★データ保持用
-      - ./postgres-init:/docker-entrypoint-initdb.d   # （初期データ用）
+      - ses-db-data:/var/lib/postgresql/data # データ保持用
+      - ./postgres-init:/docker-entrypoint-initdb.d # 初期データ用
     networks:
       - ses-network
 volumes:
